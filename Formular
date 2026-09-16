@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Züri Zahni — Bewerbungsformular · Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<style>
+:root {
+  --dark:      #393E59;
+  --mid:       #3D4975;
+  --pink:      #EF82B2;
+  --mint:      #9BBAAA;
+  --off:       #F4F5F7;
+  --border:    rgba(61,73,117,0.14);
+  --white:     #ffffff;
+
+  --font-body: 'DM Sans', sans-serif;
+  --font-disp: 'DM Serif Display', serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-card: 0 2px 12px rgba(57,62,89,0.08), 0 1px 3px rgba(57,62,89,0.06);
+  --shadow-cta:  0 8px 32px rgba(57,62,89,0.22);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--off);
+  background-image: linear-gradient(rgba(239,130,178,0.2), rgba(239,130,178,0.2));
+}
+
+/* WIREFRAME BANNER */
+.wf-banner {
+  background: #1a1a1a; color: #fff; padding: 10px 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 1000;
+  flex-wrap: wrap; gap: 8px;
+}
+.wf-banner strong { color: var(--pink); }
+.wf-colors { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.wf-swatch { width: 16px; height: 16px; border-radius: 3px; display: inline-block; }
+.wf-swatch-label { font-size: 10px; color: rgba(255,255,255,0.5); }
+.wf-pair { display: flex; align-items: center; gap: 5px; }
+
+/* NAV */
+.site-nav {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: var(--font-disp); font-size: 20px; color: var(--dark); letter-spacing: -0.3px; }
+.nav-logo span { color: var(--pink); }
+.nav-step-hint { font-size: 12.5px; color: rgba(57,62,89,0.5); }
+
+/* PAGE HERO */
+.form-hero {
+  background:
+    radial-gradient(600px 320px at 88% -10%, rgba(239,130,178,0.22), transparent 65%),
+    radial-gradient(520px 360px at -5% 120%, rgba(155,186,170,0.16), transparent 60%),
+    linear-gradient(155deg, var(--dark) 0%, var(--mid) 130%);
+  padding: 2.5rem 2.5rem 2rem; position: relative; overflow: hidden;
+}
+.form-hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--pink);
+}
+.hero-tag {
+  background: var(--pink); color: var(--white); font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; padding: 4px 12px; border-radius: 3px; display: inline-block; margin-bottom: 1rem;
+}
+.form-hero h1 {
+  font-family: var(--font-disp); font-size: 32px; color: var(--white);
+  line-height: 1.15; margin-bottom: 0.6rem; letter-spacing: -0.3px;
+}
+.form-hero h1 em { color: var(--pink); font-style: italic; }
+.form-hero p { font-size: 14.5px; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.6; font-weight: 300; }
+
+/* PROGRESS */
+.progress-wrap {
+  background: var(--mid); padding: 1.1rem 2.5rem; border-bottom: 3px solid var(--pink);
+}
+.progress-track {
+  display: flex; align-items: center; max-width: 760px; margin: 0 auto;
+}
+.progress-step { display: flex; align-items: center; gap: 10px; flex: 1; }
+.progress-step:last-child { flex: 0; }
+.dot {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; border: 2px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5); background: transparent; transition: all 0.2s;
+}
+.dot.done { background: var(--mint); border-color: var(--mint); color: var(--dark); }
+.dot.active { background: var(--pink); border-color: var(--pink); color: var(--white); }
+.progress-label { font-size: 12.5px; color: rgba(255,255,255,0.55); white-space: nowrap; }
+.progress-label.active { color: var(--white); font-weight: 500; }
+.progress-line { height: 2px; flex: 1; background: rgba(255,255,255,0.2); margin: 0 6px; }
+.progress-line.done { background: var(--mint); }
+
+/* SHELL */
+.form-shell { max-width: 760px; margin: 0 auto; padding: 2.5rem 2.5rem 4rem; }
+
+.dev-note {
+  background: rgba(239,130,178,0.08); border: 1px dashed var(--pink);
+  border-radius: var(--radius-md); padding: 0.85rem 1.1rem; margin-bottom: 1.5rem;
+  font-size: 12.5px; color: #a83d70; line-height: 1.6; display: flex; gap: 10px; align-items: flex-start;
+}
+.dev-note i { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+
+.step-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 2rem; box-shadow: var(--shadow-card); margin-bottom: 1.5rem;
+}
+.step-eyebrow { font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 0.5rem; }
+.step-title { font-family: var(--font-disp); font-size: 24px; color: var(--dark); margin-bottom: 0.4rem; letter-spacing: -0.2px; }
+.step-sub { font-size: 13.5px; color: #6b7280; margin-bottom: 1.6rem; font-weight: 300; line-height: 1.6; }
+
+/* CATEGORY CARDS (Schritt 1) */
+.cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.cat-card {
+  border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.3rem;
+  cursor: pointer; transition: all 0.15s; text-align: left; background: var(--white);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cat-card:hover { border-color: var(--pink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(57,62,89,0.1); }
+.cat-card.selected { border-color: var(--pink); border-width: 2px; background: rgba(239,130,178,0.05); }
+.cat-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.cat-icon i { font-size: 20px; color: var(--mint); }
+.cat-name { font-size: 15px; font-weight: 500; color: var(--dark); }
+.cat-desc { font-size: 12px; color: #9ca3af; line-height: 1.5; }
+
+/* FIELDS */
+.field-group { margin-bottom: 1.2rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+label {
+  display: block; font-size: 12.5px; font-weight: 500; color: var(--dark); margin-bottom: 6px;
+}
+label .opt { color: #9ca3af; font-weight: 400; }
+input[type=text], input[type=email], input[type=tel], input[type=date], input[type=number], select, textarea {
+  width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 11px 13px; font-family: var(--font-body); font-size: 14px; color: var(--dark);
+  background: var(--white); transition: border-color 0.15s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--pink); }
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233D4975' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+/* CONDITIONAL PANELS */
+.cond-panel { display: none; }
+.cond-panel.visible { display: block; }
+.cond-hint {
+  display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mid);
+  background: var(--off); border-radius: var(--radius-sm); padding: 8px 12px; margin-bottom: 1.2rem;
+}
+.cond-hint i { color: var(--pink); font-size: 14px; }
+
+/* UPLOAD DROPZONES */
+.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dropzone {
+  border: 1.5px dashed var(--border); border-radius: var(--radius-lg); padding: 1.6rem 1.2rem;
+  text-align: center; background: var(--off); transition: border-color 0.15s;
+}
+.dropzone:hover { border-color: var(--pink); }
+.dropzone i { font-size: 26px; color: var(--mid); margin-bottom: 8px; display: block; }
+.dropzone-title { font-size: 13.5px; font-weight: 500; color: var(--dark); margin-bottom: 3px; }
+.dropzone-sub { font-size: 11.5px; color: #9ca3af; }
+.dropzone .tag-optional {
+  display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  color: var(--mint); background: rgba(155,186,170,0.15); padding: 3px 9px; border-radius: 20px;
+}
+.dropzone .tag-required {
+  display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 1px;
+  color: #a83d70; background: rgba(239,130,178,0.12); padding: 3px 9px; border-radius: 20px;
+}
+
+/* NAV BUTTONS */
+.step-actions { display: flex; justify-content: space-between; align-items: center; }
+.btn-primary {
+  background: var(--pink); color: var(--white); font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  padding: 12px 26px; border-radius: var(--radius-md); border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-ghost {
+  background: transparent; color: var(--mid); font-family: var(--font-body); font-size: 14px; font-weight: 400;
+  padding: 12px 20px; border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* CONFIRMATION */
+.confirm-box { text-align: center; padding: 1rem 1rem 0.5rem; }
+.confirm-icon {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--dark); margin: 0 auto 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.confirm-icon i { font-size: 30px; color: var(--mint); }
+.confirm-box h2 { font-family: var(--font-disp); font-size: 26px; color: var(--dark); margin-bottom: 10px; }
+.confirm-box p { font-size: 14px; color: #6b7280; max-width: 420px; margin: 0 auto 1.5rem; line-height: 1.7; font-weight: 300; }
+.confirm-meta {
+  display: inline-flex; gap: 18px; flex-wrap: wrap; justify-content: center; font-size: 12.5px;
+  color: var(--mid); background: var(--off); border-radius: var(--radius-md); padding: 12px 20px;
+}
+.confirm-meta span { display: flex; align-items: center; gap: 6px; }
+.confirm-meta i { color: var(--pink); }
+
+@media (max-width: 640px) {
+  .cat-grid, .field-row, .upload-grid { grid-template-columns: 1fr; }
+  .form-shell, .form-hero, .site-nav, .progress-wrap { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .progress-label { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wf-banner">
+  <div><strong>WIREFRAME</strong> · Züri Zahni Bewerbungsformular · Klickbarer Mockup für Webentwicklung</div>
+  <div class="wf-colors">
+    <div class="wf-pair"><div class="wf-swatch" style="background:#393E59"></div><span class="wf-swatch-label">#393E59</span></div>
+    <div class="wf-pair"><div class="wf-swatch" style="background:#3D4975"></div><span class="wf-swatch-label">#3D4975</span></div>
+    <div class="wf-pair"><div class="wf-swatch" style="background:#EF82B2"></div><span class="wf-swatch-label">#EF82B2</span></div>
+    <div class="wf-pair"><div class="wf-swatch" style="background:#9BBAAA"></div><span class="wf-swatch-label">#9BBAAA</span></div>
+    <div class="wf-pair"><div class="wf-swatch" style="background:#F4F5F7; border:1px solid #ccc"></div><span class="wf-swatch-label">#F4F5F7</span></div>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <div class="nav-logo">Züri<span>Zahni</span></div>
+  <div class="nav-step-hint" id="navHint">Bewerbungsformular · Schritt 1 von 4</div>
+</nav>
+
+<div class="form-hero">
+  <span class="hero-tag">KARRIERE</span>
+  <h1>Ihre <em>Bewerbung</em> bei Züri Zahni</h1>
+  <p>Wenige Fragen, direkt online — inklusive Upload von Lebenslauf und optional einem kurzen Video. Wir melden uns so schnell wie möglich bei Ihnen.</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track" id="progressTrack"></div>
+</div>
+
+<div class="form-shell">
+
+<!-- SCHRITT 1: KATEGORIE -->
+  <div class="step-card step-panel" data-step="1">
+    <div class="step-eyebrow">Schritt 1 von 4</div>
+    <div class="step-title">Welche Stelle interessiert Sie?</div>
+    <div class="step-sub">Ihre Auswahl bestimmt die passenden Folgefragen im nächsten Schritt.</div>
+
+    <div class="cat-grid">
+      <button class="cat-card" data-cat="zahnarzt">
+        <div class="cat-icon"><i class="ti ti-stethoscope"></i></div>
+        <div class="cat-name">Zahnarzt / Zahnärztin</div>
+        <div class="cat-desc">Allgemeinzahnmedizin &amp; Spezialbereiche</div>
+      </button>
+      <button class="cat-card" data-cat="dhph">
+        <div class="cat-icon"><i class="ti ti-heart-handshake"></i></div>
+        <div class="cat-name">DH / PH</div>
+        <div class="cat-desc">Dentalhygiene &amp; Prophylaxe</div>
+      </button>
+      <button class="cat-card" data-cat="da">
+        <div class="cat-icon"><i class="ti ti-medical-cross"></i></div>
+        <div class="cat-name">DA</div>
+        <div class="cat-desc">Dentalassistenz</div>
+      </button>
+      <button class="cat-card" data-cat="lehrling">
+        <div class="cat-icon"><i class="ti ti-school"></i></div>
+        <div class="cat-name">Lehrling / Schnupperlehre</div>
+        <div class="cat-desc">Ausbildung &amp; Schnuppertage</div>
+      </button>
+    </div>
+
+    <div class="step-actions" style="margin-top:1.6rem;">
+      <span></span>
+      <button class="btn-primary" id="btnStep1Next" disabled>Weiter <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- SCHRITT 2: ANGABEN (konditional) -->
+  <div class="step-card step-panel" data-step="2" style="display:none;">
+    <div class="step-eyebrow">Schritt 2 von 4</div>
+    <div class="step-title">Ein paar Angaben zu Ihnen</div>
+    <div class="cond-hint" id="condHint">
+      <i class="ti ti-filter"></i> <span id="condHintText">Felder passen sich an Ihre Auswahl aus Schritt 1 an.</span>
+    </div>
+
+    <!-- Fachkraft-Felder: Zahnarzt / DH-PH -->
+    <div class="cond-panel" id="panel-fach">
+      <div class="field-row field-group">
+        <div>
+          <label>Fachrichtung</label>
+          <select><option>Allgemeinzahnmedizin</option><option>Kieferorthopädie</option><option>Kinderzahnmedizin</option><option>Prophylaxe</option></select>
+        </div>
+        <div>
+          <label>Pensum <span class="opt">(%)</span></label>
+          <input type="number" placeholder="z. B. 80">
+        </div>
+      </div>
+      <div class="field-row field-group">
+        <div>
+          <label>Verfügbar ab</label>
+          <input type="date">
+        </div>
+        <div>
+          <label>Berufserfahrung <span class="opt">(Jahre)</span></label>
+          <input type="number" placeholder="z. B. 3">
+        </div>
+      </div>
+    </div>
+
+    <!-- DA-Felder -->
+    <div class="cond-panel" id="panel-da">
+      <div class="field-row field-group">
+        <div>
+          <label>Pensum <span class="opt">(%)</span></label>
+          <input type="number" placeholder="z. B. 80">
+        </div>
+        <div>
+          <label>Verfügbar ab</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Berufserfahrung <span class="opt">(Jahre)</span></label>
+        <input type="number" placeholder="z. B. 2">
+      </div>
+    </div>
+
+    <!-- Lehrling-Felder -->
+    <div class="cond-panel" id="panel-lehrling">
+      <div class="field-row field-group">
+        <div>
+          <label>Alter</label>
+          <input type="number" placeholder="z. B. 16">
+        </div>
+        <div>
+          <label>Schulstufe</label>
+          <select><option>3. Sek</option><option>2. Sek</option><option>Bereits abgeschlossen</option></select>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Gewünschter Lehrbeginn / Schnupperlehre-Zeitraum</label>
+        <input type="text" placeholder="z. B. August 2027 oder KW 42/2026">
+      </div>
+    </div>
+
+    <div class="step-actions" style="margin-top:0.6rem;">
+      <button class="btn-ghost" data-back="1"><i class="ti ti-arrow-left"></i> Zurück</button>
+      <button class="btn-primary" data-next="3">Weiter <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- SCHRITT 3: UNTERLAGEN -->
+  <div class="step-card step-panel" data-step="3" style="display:none;">
+    <div class="step-eyebrow">Schritt 3 von 4</div>
+    <div class="step-title">Unterlagen hochladen</div>
+    <div class="step-sub">CV ist Pflicht. Ein kurzes Video ist optional, hilft uns aber, Sie besser kennenzulernen.</div>
+
+    <div class="upload-grid">
+      <div class="dropzone">
+        <i class="ti ti-file-cv"></i>
+        <div class="dropzone-title">Lebenslauf hochladen</div>
+        <div class="dropzone-sub">PDF, max. 10 MB</div>
+        <div class="tag-required">PFLICHT</div>
+      </div>
+      <div class="dropzone">
+        <i class="ti ti-video"></i>
+        <div class="dropzone-title">Kurzvideo hochladen</div>
+        <div class="dropzone-sub">MP4, max. 100 MB, 30–60 Sek.</div>
+        <div class="tag-optional">OPTIONAL</div>
+      </div>
+    </div>
+
+    <div class="step-actions" style="margin-top:1.6rem;">
+      <button class="btn-ghost" data-back="2"><i class="ti ti-arrow-left"></i> Zurück</button>
+      <button class="btn-primary" data-next="4">Weiter <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- SCHRITT 4: KONTAKT -->
+  <div class="step-card step-panel" data-step="4" style="display:none;">
+    <div class="step-eyebrow">Schritt 4 von 4</div>
+    <div class="step-title">Ihre Kontaktdaten</div>
+
+    <div class="field-row field-group">
+      <div>
+        <label>Vorname</label>
+        <input type="text" placeholder="Vorname">
+      </div>
+      <div>
+        <label>Nachname</label>
+        <input type="text" placeholder="Nachname">
+      </div>
+    </div>
+    <div class="field-row field-group">
+      <div>
+        <label>E-Mail</label>
+        <input type="email" placeholder="name@beispiel.ch">
+      </div>
+      <div>
+        <label>Telefon</label>
+        <input type="tel" placeholder="+41 79 000 00 00">
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Nachricht <span class="opt">(optional)</span></label>
+      <textarea rows="3" placeholder="Möchten Sie uns noch etwas mitteilen?"></textarea>
+    </div>
+
+    <div class="step-actions" style="margin-top:0.6rem;">
+      <button class="btn-ghost" data-back="3"><i class="ti ti-arrow-left"></i> Zurück</button>
+      <button class="btn-primary" id="btnSubmit"><i class="ti ti-send"></i> Bewerbung absenden</button>
+    </div>
+  </div>
+
+  <!-- BESTÄTIGUNG -->
+  <div class="step-card step-panel" data-step="5" style="display:none;">
+    <div class="confirm-box">
+      <div class="confirm-icon"><i class="ti ti-check"></i></div>
+      <h2>Vielen Dank für Ihre Bewerbung!</h2>
+      <p>Wir haben Ihre Unterlagen erhalten und melden uns in Kürze bei Ihnen. Eine Bestätigung wurde automatisch an Ihre E-Mail-Adresse gesendet.</p>
+      <div class="confirm-meta">
+        <span><i class="ti ti-mail"></i> Automatische Bestätigungsmail</span>
+        <span><i class="ti ti-clock"></i> Antwort i. d. R. innert 5 Arbeitstagen</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const steps = ['Kategorie','Angaben','Unterlagen','Kontakt','Fertig'];
+let current = 1;
+let selectedCat = null;
+
+const track = document.getElementById('progressTrack');
+function renderProgress() {
+  track.innerHTML = '';
+  steps.forEach((label, i) => {
+    const n = i + 1;
+    const stepEl = document.createElement('div');
+    stepEl.className = 'progress-step';
+    const state = n < current ? 'done' : (n === current ? 'active' : '');
+    stepEl.innerHTML = `
+      <div class="dot ${state}">${n < current ? '<i class=\"ti ti-check\"></i>' : n}</div>
+      <div class="progress-label ${n === current ? 'active' : ''}">${label}</div>
+    `;
+    track.appendChild(stepEl);
+    if (n < steps.length) {
+      const line = document.createElement('div');
+      line.className = 'progress-line' + (n < current ? ' done' : '');
+      track.appendChild(line);
+    }
+  });
+  document.getElementById('navHint').textContent =
+    current <= 4 ? `Bewerbungsformular · Schritt ${current} von 4` : 'Bewerbungsformular · Abgeschlossen';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach(p => {
+    p.style.display = (parseInt(p.dataset.step) === n) ? '' : 'none';
+  });
+  current = n;
+  renderProgress();
+  window.scrollTo({ top: document.querySelector('.progress-wrap').offsetTop, behavior: 'smooth' });
+}
+
+const catLabels = {
+  zahnarzt: 'Zahnarzt / Zahnärztin', dhph: 'DH / PH', da: 'DA', lehrling: 'Lehrling / Schnupperlehre'
+};
+const panelForCat = { zahnarzt: 'panel-fach', dhph: 'panel-fach', da: 'panel-da', lehrling: 'panel-lehrling' };
+
+document.querySelectorAll('.cat-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedCat = card.dataset.cat;
+    document.getElementById('btnStep1Next').disabled = false;
+
+    document.querySelectorAll('.cond-panel').forEach(p => p.classList.remove('visible'));
+    document.getElementById(panelForCat[selectedCat]).classList.add('visible');
+    document.getElementById('condHintText').textContent =
+      `Angezeigte Felder gelten für: ${catLabels[selectedCat]}`;
+  });
+});
+
+document.getElementById('btnStep1Next').addEventListener('click', () => showStep(2));
+document.getElementById('btnSubmit').addEventListener('click', () => showStep(5));
+
+document.querySelectorAll('[data-next]').forEach(btn => {
+  btn.addEventListener('click', () => showStep(parseInt(btn.dataset.next)));
+});
+document.querySelectorAll('[data-back]').forEach(btn => {
+  btn.addEventListener('click', () => showStep(parseInt(btn.dataset.back)));
+});
+
+renderProgress();
+</script>
+
+</body>
+</html>
